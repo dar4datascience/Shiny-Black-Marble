@@ -1,0 +1,1048 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Level-1 and Atmosphere Archive &amp; Distribution System Distributed Active Archive Center - LAADS DAAC</title>
+    <meta name="WHEREAMI" content="ui-laads"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="orgcode" content="619"/>
+    <meta name="rno" content="Sadashiva Devadiga"/>
+    <meta name="content-owner" content="Greg Ederer"/>
+    <meta name="webmaster" content="Greg Ederer"/>
+    <meta name="description" content="Level-1 and Atmosphere Archive and Distribution System Web Interface"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WNP7MLF');</script>
+<!-- End Google Tag Manager -->
+
+    <link rel="shortcut icon" href="/images/favicon/index.ico" type="image/vnd.microsoft.icon"/>
+    <link rel="apple-touch-icon" href="/images/favicon/index.png"/>
+
+    <link rel="stylesheet" href="/css/bootstrap-3.4.1/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="/css/splide/themes/splide-default.min.css"/>
+    <link rel="stylesheet" href="/css/splide/themes/splide-customizations.css?v=2"/>
+
+    <link href="https://cdn.earthdata.nasa.gov/eui/1.1.3/stylesheets/application.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="/css/dist/min/global.min.16b5e485.css"/>
+
+    <link href="/css/font-awesome/5.15.1/all.min.css" rel="stylesheet"/>
+
+
+
+
+    <!-- End S&O styles -->
+
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv-3.7.3.min.js"></script>
+    <script src="/js/html5shiv-printshiv-3.7.3.min.js"></script>
+    <script src="/js/respond-1.4.2.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-3.5.1.min.js"></script>
+  </head>
+
+  <body class="blue earthdata ">
+
+    <style>
+        #environment-banner.local { background-color: lightblue; }
+
+        #environment-banner.staging { background-color: blue; }
+    </style>
+
+
+
+
+    <nav class="container-fluid" style="">
+        <div style="">
+            <!-- Top Navigation -->
+            <div class="row navbar navbar-inverse" style="">
+                <div class="navbar-header" style="">
+                    <a href="/" class="navbar-brand" style="">
+                        <img id="logo-laads" src="/images/logo.png" style="width:80px;height:80px;" alt="LAADS DAAC">
+                        <div class="navbar-logo-text">
+                            <span class="visible-lg-inline">
+                                Level-1 and Atmosphere Archive &amp; Distribution System<br>Distributed Active Archive Center
+                            </span>
+                        </div>
+                    </a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <ul class="nav navbar-nav navbar-right collapse navbar-collapse">
+                    <li>
+                        <a href="/alerts-and-issues/">
+                            <i class="fas fa-bullhorn icon-alerts" title="Alerts & Issues"
+                               style="font-size:18px;margin-top:2px;">
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/" data-toggle="dropdown">About LAADS<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/about/">About the LAADS DAAC</a></li>
+                            <li><a href="/about/atmosphere/">About our Atmosphere</a></li>
+                            <li><a href="/uwg/">LAADS DAAC User Working Group</a></li>
+                            <li><a href="/alerts-and-issues/">Alerts &amp; Issues</a></li>
+                            <li><a href="/about/related-sites/">Related Sites of Interest</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/contact-us/">Contact Us</a></li>
+                            <li><a href="javascript:void(0);" data-toggle="modal" data-target="#about-modal">LAADS Version</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/" data-toggle="dropdown">Data <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/search/">Find Data</a></li>
+                            <li><a href="/view-data/">View Data</a></li>
+                            <li><a href="/cloud/">Cloud</a></li>
+                            <li><a href="/data/about/">About LAADS DAAC Data</a></li>
+                            <li><a href="/tools-and-services/">Tools &amp; Services</a></li>
+                            <li><a href="/archive/">LAADS Archive</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/learn">Learn</a>
+                        
+                    </li>
+                    <li>
+                        <a href="/" id="profile-menu-option" data-toggle="dropdown">Login <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <!-- See /js/menu-manager.js for logic that populates -->
+                        </ul>
+                    </li>
+                    <li id="search-nav" class="hidden-xs">
+                        <a href="#search"><i class="fas fa-search" aria-hidden="true"></i></a>
+                        <a href="#search" class="hide"><i class="far fa-times-circle" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+                <form id="search-box" class="hide" role="search" action="/find" method="GET">
+                    <input type="text" class="form-control" placeholder="Search" id="q" name="q" type="text" />
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="visible-xs-block">
+        <form role="search" action="/find" method="GET">
+            <div class="input-group homepage-search-container">
+                <input type="text" class="form-control" placeholder="Search" id="q" name="q" type="text" />
+                <div class="input-group-btn">
+                    <button class="btn btn-default homepage-search-button" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="general-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">&hellip;</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    
+    <div id="generate-token-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Token</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="generate-token-modal-loading" class="hide">
+                        Generating token &hellip; <i class="fas fa-sync icon-refresh-animate"></i>
+                    </div>
+                    <div id="generate-token-modal-complete" class="hide">
+                        <p>Please copy and save the token below for use with any supported LAADS download utilities or scripts.</p>
+                        <pre id="generate-token-modal-display-token" class="wrap"></pre>
+
+                        <p>To test, run the following <code>wget</code> download command in your terminal and see if it successfully downloaded the README text file located at the root of the LAADS archive. See also <a href="/tools-and-services/data-download-scripts/#wget" target="_blank">LAADS documentation on how to use wget</a></p>
+                        <pre id="generate-token-modal-display-wget-sample" class="wrap">wget -e robots=off -m -np -R .html,.tmp -nH --cut-dirs=3 "https://ladsweb.modaps.eosdis.nasa.gov/archive/README" --header "Authorization: Bearer <span id="generate-token-modal-display-wget-sample-token"></span>" -P .</pre>
+                    </div>
+                    <div id="generate-token-modal-error" class="hide">
+                        <div class="alert alert-danger" role="alert"><i class="fas fa-times-circle"></i> We are currently having issues generating your token. Please try again later or contact <a href="javascript:feedback.showForm()">MODAPS Support</a> with any questions.</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+        <div id="about-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">LAADS Version</h4>
+                </div>
+                <div class="modal-body">
+                    <div>Current version is
+                        <ul>
+                            <li>3.1.0</li>
+                        </ul>
+                    </div>
+                    <div>This web site brought to you by the LAADS Web Development Team.</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    
+
+    <div id="multi-download-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Confirm Download of Multiple Files</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="multi-file-loading-confirm">
+                        Verifying login status&hellip; <i class="fas fa-sync icon-refresh-animate"></i>
+                    </div>
+                    <div id="multi-file-download-confirm">
+                        <p>Please confirm before starting this batch download of <span id="multi-download-modal-num-files"></span> listed below totaling <span id="multi-download-modal-total-file-size"></span>, one file at a time.</p>
+                        <pre id="multi-download-modal-list-of-files"></pre>
+                        <div class="alert alert-warning" role="alert"><i class="fas fa-exclamation-triangle"></i> Once a batch download begins, your browser may not provide a way to cancel the batch aside from closing the browser entirely or stopping individual downloads one at a time. If in doubt, try selecting a smaller number of files for download. <a href="javascript:feedback.showForm()">MODAPS Support</a> is available to help with any questions.</div>
+                        <div class="alert alert-info" role="alert">
+                            <h3>
+                                <i class="fas fa-globe" aria-hidden="true"></i> 
+                                <strong>Browser configurations</strong>
+                            </h3>
+                            <ol>
+                                <li>Some users might have to approve once (e.g., click "Allow") to allow for future downloads of multiple files.</li>
+                                <li>To avoid a new download prompt for each file, ensure the following settings are configured in your browser:
+                                    <ul>
+                                        <li><i class="fab fa-chrome" aria-hidden="true"></i> Chrome: Settings &gt; Advanced &gt; Ask where to save each file before downloading &gt; <em>Off</em></li>
+                                        <li><i class="fab fa-firefox" aria-hidden="true"></i> Firefox:
+                                            <ol>
+                                                <li>Preferences &gt; Files and Applications &gt; <em>Save files to</em>&hellip;</li>
+                                                <li>Click checkbox &ldquo;Do this automatically for files like this from now on&rdquo;</li>
+                                            </ol>
+                                        </li>
+                                        <li><i class="fab fa-safari" aria-hidden="true"></i> Safari: Preferences &gt; General &gt; File download location &gt; <em>[specified folder]</em></li>
+                                        <li><i class="fab fa-edge" aria-hidden="true"></i> Edge: Settings &gt; Downloads &gt; Ask where to save each file before downloading &gt; <em>Off</em></li>
+                                    </ul>
+                                </li>
+                                <li>Unsupported browsers for multi-file downloads (use <i class="fas fa-download"></i> instead):
+                                    <ul>
+                                        <li><i class="fab fa-internet-explorer" aria-hidden="true"></i> Internet Explorer 11 and below</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div id="multi-file-log-in-confirm">
+                        <div class="alert alert-warning" role="alert">
+                            <a href="/oauth/login" target="_blank" rel="noopener noreferrer">
+                                <h2>
+                                    <i class="fas fa-hand-point-right"></i> Please log in and try again
+                                </h2>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="multi-file-error-confirm">
+                        <div class="alert alert-danger" role="alert"><i class="fas fa-times-circle"></i> We are currently having issues verifying your request. Please try again later or contact <a href="javascript:feedback.showForm()">MODAPS Support</a> with any questions.</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="multi-download-modal-confirm-download"><i class="fas fa-download"></i> Download Files</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+  <div class="main-container">
+    <div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="carousel-container">
+              
+
+        <div id="image-slider" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <a href="/cloud/" data-new-window-icon="false">
+                            <img src="/images/carousel/Cloud-1920-x-480-for-mobile.png"/>
+                            <div class="splide-caption">
+                                <h1>LAADS DAAC Migrates to the Cloud</h1>
+                                <p>Learn more.</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="splide__slide">
+                        <a href="/data/about" data-new-window-icon="false">
+                            <img src="/images/carousel/About-Data-1920-x-480-for-mobile.png"/>
+                            <div class="splide-caption">
+                                <h1>About LAADS DAAC Data</h1>
+                                <p>Learn about how LAADS DAAC data products are processed.</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="splide__slide">
+                        <a href="/view-data/">
+                            <img src="/images/carousel/View-Data-1920-x-240-for-mobile.jpg"/>
+                            <div class="splide-caption">
+                                <h1>View Data Now</h1>
+                                <p>Interactively search and preview data sets as images before downloading with the <br />View Data tool.</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="splide__slide">
+                        <a href="mailto:laadsdaac-join@lists.nasa.gov?subject=subscribe&body=Thank%20you%20for%20signing%20up%20for%20the%20LAADS%20DAAC%20subscriber%20list.%20Please%20send%20this%20email%2C%20with%20%E2%80%9Csubscribe%E2%80%9D%20in%20the%20subject%20line.%20This%20may%20have%20already%20been%20populated%20for%20you.%20Do%20not%20change%20the%20body%20of%20the%20email.">
+                            <img src="/images/carousel/Carousel-List-Serve-1920-x-480-for-mobile.jpg"/>
+                            <div class="splide-caption">
+                                <h1>Subscribe Now</h1>
+                                <p>Click here or email <br />laadsdaac-join@lists.nasa.gov with subject line, “subscribe.”</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+      
+
+<!-- Call to action -->
+<div class="call-to-action-wrapper">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="call-to-action-title">
+                Your Source for Level-1 and Atmospheric Data
+            </div>
+            <div class="call-to-action-leading">
+                Providing Access to Global Science Data Projects
+            </div>
+        </div>
+        <div class="col-lg-6 text-right">
+            <a href="/view-data/" target="_blank">
+                <button class="btn call-to-action-button float-left">
+                    View Data
+                </button>
+            </a>
+            <a href="/search/" target="_blank">
+                <button class="btn call-to-action-button float-left">
+                    Find Data
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+
+      <div class="category-tab-wrapper text-center">
+    <div id="category-group-tabs" class="category-tab-row">
+        <!-- Category nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            
+            <li role="presentation" class="col-md-2 category-tab nav-item category-tab-missions active">
+                <a href="#missions" aria-controls="missions" role="tab"
+                    data-toggle="tab" aria-expanded="true" class="nav-link text-center">
+                    <img src="/images/icons/icon-missions.svg" alt="Missions" class="category-tab-icon">
+                    <div class="category-tab-text">Missions</div>
+                </a>
+            </li>
+            
+            <li role="presentation" class="col-md-2 category-tab nav-item category-tab-level1 ">
+                <a href="#level0-level1" aria-controls="level0-level1" role="tab"
+                    data-toggle="tab" aria-expanded="true" class="nav-link text-center">
+                    <img src="/images/icons/icon-level1.svg" alt="Level 0 &amp; 1" class="category-tab-icon">
+                    <div class="category-tab-text">Level 0 &amp; 1</div>
+                </a>
+            </li>
+            
+            <li role="presentation" class="col-md-2 category-tab nav-item category-tab-atmosphere ">
+                <a href="#atmosphere" aria-controls="atmosphere" role="tab"
+                    data-toggle="tab" aria-expanded="true" class="nav-link text-center">
+                    <img src="/images/icons/icon-atmosphere.svg" alt="Atmosphere" class="category-tab-icon">
+                    <div class="category-tab-text">Atmosphere</div>
+                </a>
+            </li>
+            
+            <li role="presentation" class="col-md-2 category-tab nav-item category-tab-airborne ">
+                <a href="#airborne" aria-controls="airborne" role="tab"
+                    data-toggle="tab" aria-expanded="true" class="nav-link text-center">
+                    <img src="/images/icons/icon-airborne.svg" alt="Airborne" class="category-tab-icon">
+                    <div class="category-tab-text">Airborne</div>
+                </a>
+            </li>
+            
+            <li role="presentation" class="col-md-2 category-tab nav-item category-tab-land ">
+                <a href="#land" aria-controls="land" role="tab"
+                    data-toggle="tab" aria-expanded="true" class="nav-link text-center">
+                    <img src="/images/icons/icon-land.svg" alt="Land" class="category-tab-icon">
+                    <div class="category-tab-text">Land</div>
+                </a>
+            </li>
+            
+            <li role="presentation" class="col-md-2 category-tab nav-item category-tab-applications ">
+                <a href="#applications" aria-controls="applications" role="tab"
+                    data-toggle="tab" aria-expanded="true" class="nav-link text-center">
+                    <img src="/images/icons/icon-applications.svg" alt="Applications" class="category-tab-icon">
+                    <div class="category-tab-text">Applications</div>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    <div class="container-fluid main">
+
+      <!-- Main Content -->
+      <div id="mainContentRow" class="row" style="">
+        <div id="alerts" class="col-xs-12 bg-danger hide">
+          <div id="show-more" class="text-center bg-danger">
+            <div>
+              <a href="#"><b>Show more</b> <i class="fas fa-chevron-down"></i></a>
+            </div>
+            <div class="hide">
+              <a href="#"><b>Show less</b> <i class="fas fa-chevron-up"></i></a>
+            </div>
+          </div>
+        </div>
+        <section id="content-main" class="col-sm-12 col-md-12" style="">
+          
+<div class="row elevator-pitch">
+  <div class="col-md-12">LAADS DAAC primarily archives and distributes data on clouds, water vapor, and aerosols in Earth’s atmosphere as well as key instrument data for NASA, NOAA and European Space Administration missions. LAADS DAAC also serves as a backup source for MODIS and VIIRS land products.</div>
+</div>
+
+<div id="product-group-tabs" class="row">
+    <div class="tab-content">
+        
+        <div role="tabpanel" class="tab-pane fade in active" id="missions">
+            
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/modis/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/missions/tile_aquaMODIS.png);">
+                        </div>
+                        <div class="description">
+                            <h2>Aqua MODIS</h2>
+                            Launched aboard the Aqua platform in 2002, The Aqua-MODIS instrument views the entire Earth's surface every 1 to 2 days, acquiring data in 36 spectral bands ranging in wavelengths from 0.4 &#181;m to 14.4 &#181;m. MODIS data products, in resolutions of 250 m, 500 m, and 1 km - help improve our understanding of global environmental processes.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/modis/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/missions/tile_terraMODIS.png);">
+                        </div>
+                        <div class="description">
+                            <h2>Terra MODIS</h2>
+                            The initial MODIS instrument was launched aboard Terra in 1999.  MODIS-derived data products continue to play a vital role in helping develop and validate global Earth system models with sufficient predictive potential to inform and help policymakers as they address global environmental change.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/viirs/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/missions/tile_snppVIIRS.png);">
+                        </div>
+                        <div class="description">
+                            <h2>SNPP | NOAA-20 VIIRS</h2>
+                            The VIIRS instrument is a &lsquo;whiskbroom&rsquo; radiometer, launched in 2011, with 22 channels ranging from 0.412 &#181;m to 12.01 &#181;m. Five of these channels are high-resolution imagery bands or &lsquo;I-bands,&rsquo; as they are commonly referred to, and sixteen are designed as moderate-resolution bands or &lsquo;M-bands&rsquo;. One of these M-bands is the Day/Night band, or DNB.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/meris/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/missions/tile_envisatMERIS.png);">
+                        </div>
+                        <div class="description">
+                            <h2>Envisat MERIS</h2>
+                            The MERIS instrument, launched in 2002, is a moderate resolution wide field-of-view push-broom imaging spectroradiometer capable of sensing in the 390 nm to 1040 nm spectral range. The sensor has the unique capability of selectively adjusting the width and location of its 15 bands by ground command. MERIS is one of 10 sensors deployed in 2002 on board ESA's Envisat-1 research satellite.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/olci/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/missions/tile_sentinel3OLCI.png);">
+                        </div>
+                        <div class="description">
+                            <h2>Sentinel-3 OLCI</h2>
+                            The OLCI has 21 spectral bands from 400 to 1200 nm and completely overlaps with SLSTR facilitating the opportunity for fused products. OLCI is a visible imaging push-broom radiometer with more spectral bands, improved signal-to-noise ratio, among other improvements, compared to MERIS, and was developed in part to provide continuity with measurements made previously by MERIS.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/slstr/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/missions/tile_sentinel3SLSTR.png);">
+                        </div>
+                        <div class="description">
+                            <h2>Sentinel-3 SLSTR</h2>
+                            The SLSTR instrument was developed to continue and extend measurements made by the Along Track Scanning Radiometer (ATSR) instruments aboard the European Remote Sensing (ERS) satellites 1 and 2 and the Advanced ATSR on Envisat. The SLSTR has 9 bands covering the visible, shortwave infrared, and thermal infrared areas of the spectrum.
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane fade in " id="level0-level1">
+            
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/modis-L0L1/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/level-0-level-1/tile_MODISL0L1.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>MODIS L0 & L1</h2>
+                            The MODIS Level-0 Production Data Set (PDS) is the raw instrument package consisting of a 5-minute swath of data. It is used to produce calibrated and geolocated MODIS radiances, or Level-1 data. The Level-1B data products contain calibrated radiances for all 36 MODIS bands and reflectances for the reflective Solar bands.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/viirs-L0-L1/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/level-0-level-1/tile_VIIRSL1.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>VIIRS L0 & L1</h2>
+                            The VIIRS Suomi NPP (SNPP) Level-0 comprises raw instrument data packets that are used to generate calibrated and geolocated VIIRS Level-1 products. The NASA VIIRS Level-1B suite include two sets of three products (that each relate to image-resolution, moderate-resolution, and day-night band) that provide calibrated radiances and geolocation products.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/archive/Science%20Domain/Level-1/MERIS%20Level-1">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/level-0-level-1/tile_MERISL1.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>MERIS L1</h2>
+                            MERIS Level-1B data are resampled from level-0 data on a path-oriented grid, with pixel values having been calibrated to match the Top Of Atmosphere (TOA) radiance.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/olci-L0L1/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/level-0-level-1/tile_OLCIL1.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>OLCI L1</h2>
+                            OLCI processing inputs are Level-0 products, the orbits scenario file, and several auxiliary data files providing calibration coefficient, surface classification or threshold for bright and glint classification. From these inputs are derived Level-1B data, i.e. radiometrically calibrated, geo-referenced and annotated radiances.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/slstr-L0L1/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/level-0-level-1/tile_SLSTRL1B.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>SLSTR L1B</h2>
+                            The SLSTR Level-1B product gathers, for each view and for each channel, the full-resolution geolocated radiometric measurements. For thermal IR and fire channels (labelled as S7 to S9 and F1, F2 for fire channels), the radiometric measurements are expressed in Top Of Atmosphere (TOA) brightness temperatures.
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane fade in " id="atmosphere">
+            
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/aerosol/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/atmosphere/tile_aerosol.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Aerosol</h2>
+                            The MODIS Aerosol Product monitors the ambient aerosol optical thickness over the oceans globally and over the continents. Furthermore, the aerosol size distribution is derived over the oceans, and the aerosol type is derived over the continents. The aerosol product includes the &quot;deep-blue&quot; algorithm recently developed to get aerosol optical thickness over bright land areas.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/water-vapor/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/atmosphere/tile_waterVapor.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Water Vapor</h2>
+                            The MODIS Precipitable Water product consists of column water-vapor amounts. During the daytime, a near-infrared algorithm is applied over clear land areas of the globe and above clouds over both land and ocean. An infrared algorithm for deriving atmospheric profiles is also applied both day and night for Level-2.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/cloud/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/atmosphere/tile_cloud.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Cloud Properties</h2>
+                            The MODIS Cloud Product combines infrared and visible techniques to determine both physical and radiative cloud properties. Daily global Level-2 data are provided. Cloud-particle phase (ice vs. water, clouds vs. snow), effective cloud-particle radius, and cloud optical thickness are derived using the MODIS visible and near-infrared channel radiances.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/atmospheric-profiles/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/atmosphere/tile_atmosphericProfiles.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Atmospheric Profiles</h2>
+                            The MODIS Atmospheric Profile product consists of several parameters: they are total-ozone burden, atmospheric stability, temperature and moisture profiles, and atmospheric water vapor. All of these parameters are produced day and night for Level-2 at 5x5 1-km pixel resolution when at least 9 FOVs are cloud free.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/cloud-mask/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/atmosphere/tile_cloudMask.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Cloud Mask</h2>
+                            The MODIS Cloud Mask product is a Level-2 product generated at 1-km and 250-m (at nadir) spatial resolutions. The algorithm employs a series of visible and infrared threshold and consistency tests to specify confidence that an unobstructed view of the Earth's surface is observed.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/l2-joint-atmosphere/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/atmosphere/tile_L2JointAtmosphere.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>L2 Joint Atmosphere</h2>
+                            The post-launch MODIS Atmosphere Level-2 Joint Product contains a spectrum of key parameters gleaned from the complete set of standard at-launch Level-2 products: Aerosol, Water Vapor, Cloud, Profile, and Cloud Mask. The new Joint Atmosphere product was designed to be small enough to minimize data transfer and storage requirements, yet robust enough to be useful to MODIS data users.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/l3-atmosphere/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/atmosphere/tile_L3Atmosphere.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>L3 Atmosphere</h2>
+                            The Level-3 MODIS Atmosphere Daily Global Product contains roughly 600 statistical datasets that are derived from approximately 80 scientific parameters from four Level-2 MODIS Atmosphere Products: Aerosol, Water Vapor, Cloud, and Atmosphere Profile.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/viirs-cris-fusion/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/atmosphere/tile_VIIRS+CrISFusion.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>VIIRS+CrIS Fusion</h2>
+                            The Level-2 VIIRS+CrIS Fusion product leverages the attributes and assets of an imager and a sounder instrument to create narrowband earth-view radiances that are based on the Aqua MODIS instrument&rsquo;s spectral response functions.  This innovative fusion-based product is necessitated by the VIIRS instrument&rsquo;s lack of infrared bands that are responsive to atmospheric absorption.
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane fade in " id="airborne">
+            
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/ams-L0L1/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/airborne/tile_amas.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>AMS</h2>
+                            The Autonomous Modular Sensor (AMS) is an airborne scanning spectrometer that acquires high spatial resolution imagery of the Earth's features from its vantage point on-board low and medium altitude research aircraft.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/mas/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/airborne/tile_emas.png);">
+                        </div>
+                        <div class="description">
+                            <h2>MAS / eMAS</h2>
+                            The Moderate Resolution Imaging Spectroradiometer (MODIS) Airborne Simulator (MAS) sensor was developed for NASA's high-altitude ER-2 research aircraft by Daedalus Enterprises, Inc., in support of the MODIS remote sensing algorithm development.
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane fade in " id="land">
+            
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/land-surface-reflectance/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_land_surface_reflectance.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Land Surface Reflectance</h2>
+                            The MODIS Surface Reflectance products provide an estimate of the surface spectral reflectance as it would be measured at ground level in the absence of atmospheric scattering or absorption. Low-level data are corrected for atmospheric gases and aerosols, yielding a level-2 basis for several higher-order gridded products.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/land-surface-temperature-and-emissivity/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_land_surface_temperature_and_emissivity.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Land Surface Temperature & Emissivity</h2>
+                            The Land Surface Temperature (LST) and Emissivity daily data are retrieved at 1km pixels by the generalized split-window algorithm and at 6km grids by the day/night algorithm. The product is comprised of LSTs, quality assessment, observation time, view angles, and emissivities.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/brdf-albedo-and-nbar/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_BRDF_albedo_NBAR.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>BRDF, Albedo, & NBAR</h2>
+                            The Bidirectional Reflectance Distribution Function/Albedo parameters provide coefficients for mathematical functions that describe the BRDF of each pixel in the seven MODIS 'Land' bands, and albedo measurements derived simultaneously from the BRDF for bands 1-7 as well as three broad bands.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/maiac/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_MAIAC.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>MAIAC</h2>
+                            Multi-Angle Implementation of Atmospheric Correction (MAIAC) accomplishes atmospheric correction via a new method that is encoded in a generic algorithm designed to work with MODIS data to facilitate deriving both aerosol and land surface reflectance products.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/photosynthetically-active-radiation/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_photosynthetically_active_radiation.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Photosynthetically Active Radiation</h2>
+                            Incident Photosynthetically Active Radiation (PAR) on the Earth&rsquo;s surface represents a part of the solar radiation spectrum from 0.4 &#181;m to 0.7 &#181;m that is absorbed, transferred and stored within ecosystems. PAR constitutes a crucial input parameter that is used in several terrestrial and aquatic ecosystem productivity models to support climate change studies, both on regional and global scales.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/vegetation-indices/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_vegetation_indices.png);">
+                        </div>
+                        <div class="description">
+                            <h2>Vegetation Indices</h2>
+                            MODIS vegetation indices, produced on 16-day intervals and at multiple spatial resolutions, provide consistent spatial and temporal comparisons of vegetation canopy greenness, a composite property of leaf area, chlorophyll and canopy structure. Two vegetation indices are derived from atmospherically-corrected reflectance in the red, near-infrared, and blue wavebands.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/lai-and-fpar/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_LAI&amp;fPAR.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>LAI & fPAR</h2>
+                            LAI is defined as the one-sided green leaf area per unit ground area in broadleaf canopies and as half the total needle surface area per unit ground area in coniferous canopies. FPAR is the fraction of photosynthetically active radiation (400-700 nm) absorbed by green vegetation.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/gpp-and-npp/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_GPP&amp;NPP.png);">
+                        </div>
+                        <div class="description">
+                            <h2>GPP & NPP</h2>
+                            The Primary Production products are designed to provide an accurate regular measure of the growth of the terrestrial vegetation. The product is a cumulative composite of GPP values based on the radiation use efficiency concept that may be used as inputs to data models for calculating terrestrial energy, carbon, water cycle processes, and biogeochemistry of vegetation.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/evapotranspiration/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_evapotranspiration.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Evapotranspiration</h2>
+                            This project is part of NASA/EOS project to estimate global terrestrial evapotranspiration from earth land surface by using satellite remote sensing data. MOD16 global evapotranspiration product can be used to calculate regional water and energy balance, soil water status; hence, it provides key information for water resource management.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/thermal-anomalies-fire/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_thermal_anomalies.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Thermal Anomalies/Fire</h2>
+                            MODIS Thermal Anomalies/Fire products are primarily derived from MODIS 4- and 11-micrometer radiances. The fire detection strategy is based on absolute detection of a fire (when the fire strength is sufficient to detect), and on detection relative to its background (to account for variability of the surface temperature and reflection by sunlight).
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/burned-area/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_burned_area.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Burned Area</h2>
+                            The Burned Area product contains burning and quality information on a per-pixel basis. Produced from both the Terra and Aqua MODIS-derived daily surface reflectance inputs, the algorithm analyzes the daily surface reflectance dynamics to locate rapid changes, and uses that information to detect the approximate date of burning, mapping the spatial extent of recent fires only.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/land-cover-and-phenology/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_land_cover.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Land Cover & Phenology</h2>
+                            The MODIS Terra+Aqua Combined Land Cover product incorporates five different land cover classification schemes, derived through a supervised decision-tree classification method. The primary land cover scheme identifies 17 classes defined by the IGBP, including 11 natural vegetation classes, three human-altered classes, and three non-vegetated classes.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/vegetation-continuous-fields/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_vegetation_continuous_fields.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Vegetation Continuous Fields</h2>
+                            Proportional estimates of cover are developed from global training data derived using high-resolution imagery. The training data and phenological metrics are used with a regression tree to derive percent cover globally. The model is then used to estimate areal proportions of life form, leaf type, and leaf longevity.
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/science-domain/nighttime-lights/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/land/tile_nighttime_lights.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Nighttime Lights</h2>
+                            Nighttime Lights (NTL) represent NASA&rsquo;s recognition of the importance of studying human impacts on the globe at night.  The SNPP VIIRS instrument supports a Day-Night Band sensor that provides global daily measurements of nocturnal visible and near-infrared light that are suitable for Earth system science and applications. Two 500-m products comprise the NTL suite.
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane fade in " id="applications">
+            
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/applications/modis-for-nacp/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/applications/tile_NACP.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>MODIS for NACP</h2>
+                            The North American Carbon Program (NACP ) provides the scientific foundation to inform future policy decisions involving the carbon cycle, such as managing carbon sources and sinks through efficient and effective options to reduce emission and enhance carbon sinks. (Image credit: NASA GSFC Scientific Visualization Studio)
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/missions-and-measurements/applications/ltdr/">
+                    <div class="science-discipline-card-container">
+                        <div class="science-domain-thumbnail" style="background-image: url(/images/missions-and-measurements/applications/tile_LTDR.jpg);">
+                        </div>
+                        <div class="description">
+                            <h2>Long-Term Data Record</h2>
+                            The Long-Term Data Record (LTDR), a NASA Research, Education and Applications Solutions Network (REASoN) project, produces, validates and distributes a global land surface climate data record (CDR) that uses both mature and well-tested algorithms in concert with the best-available polar-orbiting satellite data from past to the present.
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="laads-alerts" class="feed-section">
+    <div class="wrap">
+        <header class="feed-section-header">
+            <a class="daac-selector" href="alerts-and-issues/" title="Select a news source">LAADS Alerts</a>
+        </header>
+        <div class="feed-grid">
+            <img class="loading" src="/images/loading.gif"/>
+            <p id="news-not-found" class="empty-message text-center hide">No news items were found.</p>
+            <div id="news-container" class="news-container">
+                <div id="template-eui-row" class="row hide"></div>
+                <!-- div below goes inside div above -->
+                <div id="template-eui-super-bullet" class="eui-super-bullet hide">
+                    
+                    <div class="eui-super-bullet-icon">
+                        <i class="eui-icon eui-fa-align-left"></i>
+                    </div>
+                    <div class="eui-super-bullet-content">
+                        <h4><a href="/alerts-and-issues/?id=">Some title</a></h4>
+                        <p class="news-item-date">
+                            Published:
+                            <time datetime="2017-02-22T20:00:00.000Z">
+                                February 22, 2017
+                            </time>
+                        </p>
+                        <div><!-- Collapsed version --></div>
+                        <div class="hide"><!-- Complete version --></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        </section>
+      </div>  <!-- mainContentRow -->
+    </div> <!-- container main -->
+  </div> <!-- main-container -->
+
+
+
+<div class="container-fluid">
+
+            <footer class="row">
+                <div class="col-xs-12 col-sm-4">
+                    <a href="https://www.nasa.gov" data-new-window-icon="false" class="img logo"><img src="/images/NASA_logo.svg" alt="NASA Logo, National Aeronautics and Space Administration"></a>
+                    <a href="https://nasa.gov/goddard/" data-new-window-icon="false" class="img gsfc"><img src="/images/goddardsignature2.png" alt="NASA's Goddard Space Flight Center"></a>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <ul class="list-unstyled">
+                        <li>Level-1 and Atmosphere Archive &amp; Distribution System</li>
+                        <li>Distributed Active Archive Center</li>
+                        <li>Version: 3.1.0</li>
+                        <li>NASA Official: Sadashiva Devadiga</li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-sm-offset-1">
+                    <ul class="list-unstyled policy-links">
+                        <li><a href="http://www.nasa.gov/about/highlights/HP_Privacy.html" data-new-window-icon="false">Privacy Policy and Important Notices</a></li>
+                        <li><a href="/contact-us">Contact Us</a></li>
+                        <li><a href="/internal">Internal</a></li>
+                        <li><a href="/contact-us">Subscribe</a></li>
+                        <li>
+<a href="/CoreTrust/LAADS-DAAC.pdf" data-new-window-icon="false" class="img logo"><img src="/images/CoreTrustSeal-logo-transparent.png" alt="CoreTrust Logo"></a>
+                        </li>
+                    </ul>
+
+                </div>
+            </footer>
+
+</div> <!--container-fluid -->
+
+
+
+
+        <script src="/js/bootstrap-3.4.1/bootstrap.min.js"></script>
+
+        <script src="/js/splide/splide.min.js?v=3.6.9"></script>
+
+    <script src="https://cdn.earthdata.nasa.gov/eui/1.1.3/js/eui.js"></script>
+    <script src="https://fbm.earthdata.nasa.gov/for/LAADS/feedback.js"></script>
+    <script src="/js/shared.js?v=1"></script>
+    <script src="/js/laads.js?v=14"></script>
+
+    <script src="/js/HtmlSanitizer.js"></script>
+    <script src="/js/menu-manager.js?v=8"></script>
+
+
+    <!-- Add Tophat to all pages -->
+    <script src="https://cdn.earthdata.nasa.gov/tophat2/tophat2.js" id="earthdata-tophat-script" data-show-status="true" data-show-fbm="true" data-current-daac="LAADS"></script>
+    <link rel="stylesheet" href="/css/tophat-overrides.css?v=On12wuEx"/>
+    <script id="laads-home" src="/js/home.js?v=28"></script>
+    <script id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NASA&subagency=GSFC&dclink=true"></script>
+    <noscript>
+    Javascript is not enabled to display NASA's Earthdata Network navigation bar. You may alternatively view this <a href="https://earthdata.nasa.gov/tophat-links.html">here</a>
+    </noscript>
+    <!-- Add Tophat -->
+
+  </body>
+</html>
