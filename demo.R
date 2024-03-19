@@ -1,6 +1,6 @@
 #### Setup
 # Load packages
-library(blackmarbler)
+#library(blackmarbler)
 library(geodata)
 library(sf)
 library(raster)
