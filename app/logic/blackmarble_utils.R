@@ -1,5 +1,5 @@
 box::use(
-  terra[rast, crop, mosaic],
+  terra[rast, crop, mosaic, approximate],
   sf[read_sf, st_intersects, st_drop_geometry],
   purrr[list_rbind, map2],
   hdf5r[h5file],
@@ -86,16 +86,16 @@ julian_to_month <- function(julian_date) {
 #' @export
 remove_fill_value_from_satellite_data <- function(data, variable) {
   artifact_values_mapping <- list(
-    c(255, c("Granule", "Mandatory_Quality_Flag", "Latest_High_Quality_Retrieval",
+    list(255, c("Granule", "Mandatory_Quality_Flag", "Latest_High_Quality_Retrieval",
              "Snow_Flag", "DNB_Platform", "Land_Water_Mask",
              "AllAngle_Composite_Snow_Covered_Quality", "AllAngle_Composite_Snow_Free_Quality",
              "NearNadir_Composite_Snow_Covered_Quality", "NearNadir_Composite_Snow_Free_Quality",
              "OffNadir_Composite_Snow_Covered_Quality", "OffNadir_Composite_Snow_Free_Quality")),
-    c(-999.9, "UTC_Time"),
-    c(-32768, c("Sensor_Azimuth", "Sensor_Zenith", "Solar_Azimuth", "Solar_Zenith",
+    list(-999.9, "UTC_Time"),
+    list(-32768, c("Sensor_Azimuth", "Sensor_Zenith", "Solar_Azimuth", "Solar_Zenith",
                 "Lunar_Azimuth", "Lunar_Zenith", "Glint_Angle", "Moon_Illumination_Fraction",
                 "Moon_Phase_Angle")),
-    c(65535, c("DNB_At_Sensor_Radiance_500m", "BrightnessTemperature_M12", "BrightnessTemperature_M13",
+    list(65535, c("DNB_At_Sensor_Radiance_500m", "BrightnessTemperature_M12", "BrightnessTemperature_M13",
                "BrightnessTemperature_M15", "BrightnessTemperature_M16", "QF_Cloud_Mask", "QF_DNB",
                "QF_VIIRS_M10", "QF_VIIRS_M11", "QF_VIIRS_M12", "QF_VIIRS_M13", "QF_VIIRS_M15", "QF_VIIRS_M16",
                "Radiance_M10", "Radiance_M11", "DNB_BRDF-Corrected_NTL", "DNB_Lunar_Irradiance",
@@ -116,7 +116,7 @@ remove_fill_value_from_satellite_data <- function(data, variable) {
 
   for (mapping in artifact_values_mapping) {
     variables <- mapping[[2]]
-    if (variable %in% variables) {
+    if (variable %in% variables || variable %in% unlist(variables)) {
       value <- mapping[[1]]
       data[data == value] <- NA
       mapping_found <- TRUE
@@ -215,21 +215,26 @@ apply_scaling_factor_to_viirs_data <- function(x, variable) {
 #' Black Marble User Guide - https://viirsland.gsfc.nasa.gov/PDF/BlackMarbleUserGuide_v1.2_20220916.pdf
 #'
 #' @export
-convert_h5_to_raster <- function(file_path, variable_name, quality_flags_to_remove = numeric()) {
+convert_h5_to_raster <- function(file_path,
+                                 variable_name,
+                                 quality_flags_to_remove = numeric()) {
 
   # Load HDF5 file
   h5_data <- h5file(file_path, "r+")
 
   # Extract data and metadata
-
-  result_list <- extract_data_and_metadata_from_hdf5(h5_data, file_path, variable_name, quality_flags_to_remove)
+print("extract_data_and_metadata_from_hdf5")
+  result_list <- extract_data_and_metadata_from_hdf5(h5_data,
+                                                     file_path,
+                                                     variable_name,
+                                                     quality_flags_to_remove)
 
   data <- result_list$data
   metadata <- result_list$metadata
-
+print("create_raster")
   # Convert data to raster
   raster_obj <- create_raster(data, metadata)
-
+print("clean_raster_data")
   # Clean raster data
   raster_obj <- clean_raster_data(raster_obj, variable_name)
 
@@ -239,23 +244,10 @@ convert_h5_to_raster <- function(file_path, variable_name, quality_flags_to_remo
   return(raster_obj)
 }
 
-
-
-#' Extract Data from HDF5 File
-extract_data_from_hdf5 <- function(h5_data, file_path, variable_name, quality_flags_to_remove) {
-  if (grepl("VNP46A1|VNP46A2", file_path)) {
-    # Extract data for daily files
-    data <- extract_daily_data(h5_data, variable_name, quality_flags_to_remove)
-  } else {
-    # Extract data for monthly/annually files
-    data <- extract_monthly_data(h5_data, variable_name, quality_flags_to_remove)
-  }
-  return(data)
-}
-
-
 #' Extract Daily Data from HDF5 File
-extract_daily_data <- function(file_path, h5_data, variable_name, quality_flags_to_remove) {
+extract_daily_data <- function(file_path,
+                               h5_data,
+                               variable_name, quality_flags_to_remove) {
   # Extracting daily data logic from the original function
   if(variable_name %in% c(
     "DNB_At_Sensor_Radiance",
@@ -356,17 +348,24 @@ extract_monthly_data <- function(h5_data, variable_name, quality_flags_to_remove
 
 #' Extract Data and Metadata from HDF5 File
 #' Extract Data and Metadata from HDF5 File
-extract_data_and_metadata_from_hdf5 <- function(h5_data, file_path, variable_name, quality_flags_to_remove) {
+extract_data_and_metadata_from_hdf5 <- function(h5_data,
+                                                file_path,
+                                                variable_name,
+                                                quality_flags_to_remove) {
   if (grepl("VNP46A1|VNP46A2", file_path, ignore.case = TRUE)) {
+    print("im in daily_result")
     # Extract data for daily files
     daily_result <- extract_daily_data(file_path,
-                                       h5_data, variable_name, quality_flags_to_remove)
+                                       h5_data,
+                                       variable_name,
+                                       quality_flags_to_remove)
+
     data <- daily_result$data
     min_lon <- daily_result$min_lon
     max_lon <- daily_result$max_lon
     min_lat <- daily_result$min_lat
     max_lat <- daily_result$max_lat
-    print("im in daily_result")
+
   } else {
     print("im in monthly_result")
     # Extract data for monthly/annually files
@@ -618,7 +617,7 @@ download_and_convert_raster <- function(file_name,
 
   } else {
     response <- request |>
-      req_progress(type = "up") |>
+      req_progress(type = "down") |>
       req_perform(
         path = download_path
       )
@@ -820,6 +819,8 @@ retrieve_and_process_nightlight_data <- function(roi_sf,
   grid_use_sf <- bm_tiles_sf[inter > 0,]
 
   # Make Raster ----------------------------------------------------------------
+  print("processing tiles...")
+
   raster <- process_tiles(bm_files_df, grid_use_sf, check_all_tiles_exist, temp_dir, product_id, variable, bearer, quality_flags_to_remove, quiet)
 
   ## Crop
@@ -921,7 +922,7 @@ bm_raster <- function(roi_sf,
 
   # Interpolate ----------------------------------------------------------------
   if (interpol_na) {
-    r <- terra::approximate(r, method = method, rule = rule, f = f, ties = ties, z = z, NArule = NArule)
+    r <- approximate(r, method = method, rule = rule, f = f, ties = ties, z = z, NArule = NArule)
   }
 
   unlink(temp_dir, recursive = TRUE)
