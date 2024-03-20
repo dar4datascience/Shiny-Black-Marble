@@ -3,9 +3,10 @@
 #library(blackmarbler)
 library(geodata)
 library(sf)
-library(raster)
+library(terra)
 library(ggplot2)
 library(lubridate)
+source('app/logic/blackmarble_utils.R')
 
 #### Define NASA bearer token
 bearer <- Sys.getenv("BEARER_NASA_TOKEN")
@@ -23,26 +24,40 @@ ntl_r <- bm_raster(roi_sf = roi_sf,
                    variable = "Gap_Filled_DNB_BRDF-Corrected_NTL")
 
 
+# ntl is returned but ........
+
 #### Prep data
-ntl_m_r <- ntl_r |> raster::mask(roi_sf)
+ntl_m_r <- ntl_r |>
+  mask(roi_sf)
 
-ntl_df <- rasterToPoints(ntl_m_r, spatial = TRUE) |> as.data.frame()
-names(ntl_df) <- c("value", "x", "y")
+ntl_df <- as.points(ntl_m_r) |>
+  st_as_sf()
 
-## Distribution is skewed, so log
-ntl_df$value_adj <- log(ntl_df$value+1)
+adjusted_ntl_df <- ntl_df |>
+  ## Remove very low values of NTL; can be considered noise
+  mutate(
+    t2023_01_01 = ifelse(t2023_01_01 <= 2, 0, t2023_01_01)
+  ) |>
+  ## Distribution is skewed, so log
+  mutate(t2023_01_01 = log(t2023_01_01 + 1))
+
+#names(ntl_df$t2023_01_01) <- c("value", "x", "y")
+
 
 ##### Map
 ggplot() +
-  geom_raster(data = ntl_df,
-              aes(x = x, y = y,
-                  fill = value_adj)) +
-  scale_fill_gradient2(low = "black",
-                       mid = "yellow",
-                       high = "red",
-                       midpoint = 4) +
-  coord_quickmap() +
-  theme_void() +
-  theme(plot.title = element_text(face = "bold", hjust = 0.5),
-        legend.position = "none")
+  geom_sf(data = adjusted_ntl_df,
+          aes(fill = t2023_01_01),
+          color = NA) +
+  # scale_fill_viridis_c(option = "rocket",
+  #                      guide = "none",
+  #                      rescaler = scales::rescale) +
+  # geom_raster(data = adjusted_ntl_df,
+  #             aes(x = x, y = y,
+  #                 fill = t2023_01_01)) +
+  # scale_fill_gradient2(low = "black",
+  #                      mid = "yellow",
+  #                      high = "red",
+  #                      midpoint = 4) +
+  theme_void()
 

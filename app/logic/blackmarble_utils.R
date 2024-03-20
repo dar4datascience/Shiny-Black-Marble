@@ -1,5 +1,5 @@
 box::use(
-  terra[rast, crop, mosaic, approximate],
+  terra[rast, crop, mosaic, approximate, ext],
   sf[read_sf, st_intersects, st_drop_geometry],
   purrr[list_rbind, map2],
   hdf5r[h5file],
@@ -224,17 +224,23 @@ convert_h5_to_raster <- function(file_path,
 
   # Extract data and metadata
 print("extract_data_and_metadata_from_hdf5")
+
   result_list <- extract_data_and_metadata_from_hdf5(h5_data,
                                                      file_path,
                                                      variable_name,
                                                      quality_flags_to_remove)
 
   data <- result_list$data
+
   metadata <- result_list$metadata
-print("create_raster")
+
+  print("create_raster")
   # Convert data to raster
+
   raster_obj <- create_raster(data, metadata)
-print("clean_raster_data")
+
+  print("clean_raster_data")
+
   # Clean raster data
   raster_obj <- clean_raster_data(raster_obj, variable_name)
 
@@ -394,7 +400,7 @@ create_raster <- function(data, metadata) {
   transposed_data[transposed_data == metadata$nodata_val] <- NA
 
   # Create extents class
-  rasExt <- extent(c(metadata$min_lon,
+  rasExt <- ext(c(metadata$min_lon,
                      metadata$max_lon,
                      metadata$min_lat,
                      metadata$max_lat)
@@ -706,7 +712,17 @@ count_n_obs <- function(values) {
                      across(orig_vars, ~length(.), .names = "n_pixels.{.col}"))
 }
 
-process_tiles <- function(bm_files_df, grid_use_sf, check_all_tiles_exist, temp_dir, product_id, variable, bearer, quality_flags_to_remove, quiet) {
+process_tiles <-
+  function(bm_files_df,
+           grid_use_sf,
+           check_all_tiles_exist,
+           temp_dir,
+           product_id,
+           variable,
+           bearer,
+           quality_flags_to_remove,
+           quiet
+  ) {
 
   tile_ids_rx <- grid_use_sf$TileID |>
     paste(collapse = "|")
@@ -727,7 +743,12 @@ process_tiles <- function(bm_files_df, grid_use_sf, check_all_tiles_exist, temp_
   }
 
   r_list <- lapply(selected_bm_files_df$name, function(name_i) {
-    download_and_convert_raster(name_i, temp_dir, variable, bearer, quality_flags_to_remove, quiet)
+    download_and_convert_raster(name_i,
+                                temp_dir,
+                                variable,
+                                bearer,
+                                quality_flags_to_remove,
+                                quiet)
   })
 
   if (length(r_list) == 1) {
@@ -922,7 +943,16 @@ bm_raster <- function(roi_sf,
 
   # Interpolate ----------------------------------------------------------------
   if (interpol_na) {
-    r <- approximate(r, method = method, rule = rule, f = f, ties = ties, z = z, NArule = NArule)
+    r <-
+      approximate(
+        r,
+        method = method,
+        rule = rule,
+        f = f,
+        ties = ties,
+        z = z,
+        NArule = NArule
+      )
   }
 
   unlink(temp_dir, recursive = TRUE)
