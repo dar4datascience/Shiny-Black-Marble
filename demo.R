@@ -25,15 +25,27 @@ ntl_r <- bm_raster(roi_sf = roi_sf,
 
 
 # ntl is returned but ........
+library(tidyterra)
+
+ggplot() +
+  geom_spatraster(data = ntl_r, aes(fill = t2023_01_01)) +
+  # use wg84 projection crs
+  coord_sf(crs = 4326) +
+  scale_fill_hypso_c()
 
 #### Prep data
 ntl_m_r <- ntl_r |>
   mask(roi_sf)
 
-ntl_df <- as.points(ntl_m_r) |>
-  st_as_sf()
 
-adjusted_ntl_df <- ntl_df |>
+ggplot() +
+  geom_spatraster(data = ntl_m_r, aes(fill = t2023_01_01)) +
+  # use wg84 projection crs
+  coord_sf(crs = 4326) +
+  scale_fill_hypso_c()
+
+
+adjusted_ntl_df <- ntl_m_r |>
   ## Remove very low values of NTL; can be considered noise
   mutate(
     t2023_01_01 = ifelse(t2023_01_01 <= 2, 0, t2023_01_01)
@@ -43,21 +55,9 @@ adjusted_ntl_df <- ntl_df |>
 
 #names(ntl_df$t2023_01_01) <- c("value", "x", "y")
 
-
-##### Map
 ggplot() +
-  geom_sf(data = adjusted_ntl_df,
-          aes(fill = t2023_01_01),
-          color = NA) +
-  # scale_fill_viridis_c(option = "rocket",
-  #                      guide = "none",
-  #                      rescaler = scales::rescale) +
-  # geom_raster(data = adjusted_ntl_df,
-  #             aes(x = x, y = y,
-  #                 fill = t2023_01_01)) +
-  # scale_fill_gradient2(low = "black",
-  #                      mid = "yellow",
-  #                      high = "red",
-  #                      midpoint = 4) +
-  theme_void()
+  geom_spatraster(data = adjusted_ntl_df, aes(fill = t2023_01_01)) +
+  # use wg84 projection crs
+  coord_sf(crs = 4326) +
+  scale_fill_hypso_c()
 
